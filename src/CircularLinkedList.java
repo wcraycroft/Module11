@@ -5,31 +5,22 @@
  * Description: Eve's Suitors
  *
  *      Instance variables
- *           Node head
+ *           Node head - points to first Node in list
  *
  *      Inner Classes
  *           Node
+ *           Iterator
  *
  *      Methods:
- *           No-argument Constructor
- *           addToStart() - adds a node to the start of the list
- *           deleteFromstart() - deletes node at the start of the list and
- *                               returns the deleted node
- *           isEmpty() - returns true if the list has no elements
- *           clear() - deletes all nodes in the list
+ *           Default Constructor
+ *           append() - Adds a node at the end fo the list
+ *           removeNextSuitor() - skips 2 suitors and removes the next
+ *           getCurrentSuitor() - returns the suitor at current position
  *           size() - returns the number of nodes in the list
- *           indexOf() - returns the index of the mode containing the student
- *                      suitor passed as a parameter
- *           contains() - returns true if the suitor of a student matches the
- *                        parameter to this method
+ *           indexOf() - returns the index of the mode containing the student suitor passed as a parameter
+ *           contains() - returns true if the suitor of a student matches the parameter to this method
  *           equals() - returns true if the size of the
  *           toString() - prints the suitor of each student in the list
- *
- *  Discussion Items:
- *    * Changes from original versions:
- *       * Removed all getters and setters (except setSuitor) in Node class
- *       * Accessed a Node's instance variables directly in LinkedList class
- *       * Made the Node class private
  */
 
 
@@ -105,12 +96,6 @@ public class CircularLinkedList {
         return size;
     }
 
-    // Empty the list
-    public void clear() {
-        head = null ;                 // garbage collection will reclaim the space
-        size = 0;
-    }
-
     // returns the index of the suitor of a student, or -1 if not found
     public int indexOf(int suitor) {
 
@@ -179,19 +164,9 @@ public class CircularLinkedList {
     }
 
 
-    /* Node.java -- inner class copied from Node class in LinkedListDemo project
-     *
-     *      Instance variables:
-     *          String suitor
-     *          Node link
-     *
-     *      Methods
-     *          Full constructor
-     *          setters and getters   <-  removed in this version (except setSuitor)
-     *          equals
-     *          toString
+    /**
+     * This inner class stores a suitor (int) and a link to the next Node in the list.
      */
-
     private class Node {
 
         // Instance variables
@@ -220,31 +195,18 @@ public class CircularLinkedList {
     } // end of Node inner class
 
 
-    /* Iterator.java -- an (inner) iterator class
+    /**
+     * Iterator.java - provides the functionality needed to traverse the linked list
      *
      *      Instance variables:
      *          Node position - current position of iterator
      *          Node previous - node prior to node at position
      *
-     *      Methods (all are public)
-     *          Full constructor
-     *          restart
-     *          next
-     *          hasNext
-     *          peek
-     *          add
-     *          change
-     *          delete
-     *          equals and toString() are not implemented
-     *
-     *   Can throw a NoSuchElementException if trying to change or delete an
-     *   element at a non-existant position
-     *
-     *   Can thrown an IllegalStateException if trying to peek at the next
-     *   element in the list if none exists
-     *
-     *   Note: If any changes are made to a list, then the calling program should
-     *         restart any iterators on that list
+     *      Methods
+     *          restart - sets position to head
+     *          next - returns the current position and moves pointer to link
+     *          hasNext - returns true if position link is not null
+     *          delete - removes Node at position
      */
     public class Iterator {
         private Node position;

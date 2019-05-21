@@ -1,3 +1,28 @@
+/* HugeNumber.java - Modified Linked List from textbook with a sorted add method
+ * Author:     Will Craycroft
+ * Module:     11
+ * Project:    HW 11 - Project 2
+ * Description: Sorted Linked List
+ *
+ *      Instance variables
+ *           Node head - points to first Node in list
+ *
+ *      Inner Classes
+ *           Node
+ *           Iterator
+ *
+ *      Methods:
+ *           Default Constructor
+ *           addDigit() - Adds next most-significant digit to head of the list
+ *           reset() - clears the list, resetting the huge number
+ *           toString() - prints the suitor of each student in the list
+ *
+ *      Modifications made:
+ *        1) Limited generic parameter to only Comparable objects
+ *        2) AddSorted method which iterates through the linked list until it finds a larger value, then creates a new
+ *           node before that value.
+ */
+
 import java.util.NoSuchElementException;
 
 public class HugeNumber {
@@ -33,7 +58,7 @@ public class HugeNumber {
     }
 
 
-    // Returns all digits as a string (-1 if empty)
+    // Returns all digits as a string (returns empty String if no links exist)
     public String toString() {
 
         String returnString = "" ;
@@ -42,10 +67,7 @@ public class HugeNumber {
         Node position = head ;
 
         // Print each node
-        if (head == null) {
-            // If empty, return -1
-            returnString += "-1" ;
-        } else {
+        if (head != null) {
             // Loop through digits (most significant to least) and append to return String
             while (position != null) {
                 returnString += position.digit;   // ***** access digit directly *****
@@ -57,16 +79,12 @@ public class HugeNumber {
     }
 
 
-    /* Node.java -- inner class copied from Node class in LinkedListDemo project
+    /**
+     * This inner class stores a suitor (int) and a link to the next Node in the list
      *
      *      Instance variables:
-     *          String digit
+     *          int digit
      *          Node link
-     *
-     *      Methods
-     *          Full constructor
-     *          equals
-     *          toString
      */
     private class Node {
 
@@ -83,32 +101,19 @@ public class HugeNumber {
         }
     } // end of Node inner class
 
-    /* Iterator.java -- an (inner) iterator class
+    /**
+     * Iterator.java - provides the functionality needed to traverse the linked list
      *
      *      Instance variables:
      *          Node position - current position of iterator
      *          Node previous - node prior to node at position
      *
-     *      Methods (all are public)
-     *          Full constructor
-     *          restart
-     *          next
-     *          hasNext
-     *          peek
-     *          add
-     *          change
-     *          delete
-     *          equals and toString() are not implemented
-     *
-     *   Can throw a NoSuchElementException if trying to change or delete an
-     *   element at a non-existant position
-     *
-     *   Can thrown an IllegalStateException if trying to peek at the next
-     *   element in the list if none exists
-     *
-     *   Note: If any changes are made to a list, then the calling program should
-     *         restart any iterators on that list
+     *      Methods
+     *          restart - sets position to head
+     *          next - returns the current position and moves pointer to link
+     *          hasNext - returns true if position link is not null
      */
+
     public class Iterator {
         private Node position ;
         private Node previous ;          //previous value of position
